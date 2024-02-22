@@ -153,7 +153,6 @@ plt.title("Comparison plot of Ridge, Lasso and Linear regression model")
 plt.show()
 
 
-
 # Plot Initial Data
 plt.figure(figsize=(10, 6))
 plt.scatter(np.arange(len(Y)),Y, color='blue', label='Original Data')
@@ -161,16 +160,22 @@ plt.xlabel('Price')
 plt.ylabel('predicted Price')
 
 # Plot Regression Results
-plt.plot( lr.predict(X_test), color='green', label='Linear Regression')
-plt.plot( ridge_cv.predict(X_test), color='red', label='Ridge Regression')
-plt.plot( lasso_cv.predict(X_test), color='orange', label='Lasso Regression')
+plt.plot( lr.predict(X), color='green', label='Linear Regression')
+plt.plot( ridge_cv.predict(X), color='red', label='Ridge Regression')
+plt.plot( lasso_cv.predict(X), color='orange', label='Lasso Regression')
 plt.legend()
 plt.show()
 
 
-from sklearn.metrics import r2_score
+
+from sklearn.metrics import r2_score,mean_squared_error
 
 
 print(r2_score(Y, lr.predict(X)))
-print(lasso_cv.r2_score(X_test, y_test))
+print(r2_score(Y, ridge_cv.predict(X)))
+print(r2_score(Y, lasso_cv.predict(X)))
 
+
+print(mean_squared_error(Y, lr.predict(X)))
+print(mean_squared_error(Y, ridge_cv.predict(X)))
+print(mean_squared_error(Y, lasso_cv.predict(X)))
